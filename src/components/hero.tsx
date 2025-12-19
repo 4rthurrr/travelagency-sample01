@@ -47,29 +47,29 @@ export default function Hero() {
                 <div className="flex flex-col items-center">
                     <TextReveal
                         text="Discover the"
-                        className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight max-w-4xl drop-shadow-md"
+                        className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] max-w-4xl drop-shadow-md"
                         delay={0.4}
                     />
                     <TextReveal
                         text="Extraordinary"
-                        className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight max-w-4xl drop-shadow-md text-emerald-400"
+                        className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] max-w-4xl drop-shadow-md text-emerald-400"
                         delay={0.8}
                     />
                 </div>
 
                 <ScrollAnimation variant="fadeUp" delay={1.2}>
-                    <p className="text-lg md:text-xl text-white/90 max-w-2xl mb-8">
+                    <p className="text-base md:text-xl text-white/90 max-w-2xl mb-4 md:mb-8 px-4">
                         Experience the pearl of the Indian Ocean with tailor-made tour packages designed just for you.
                     </p>
                 </ScrollAnimation>
 
                 {/* Search Bar */}
-                <div className="w-full max-w-3xl bg-white/10 backdrop-blur-xl border border-white/20 rounded-full p-1 shadow-2xl flex flex-col md:flex-row items-center gap-0.5 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-1000 transform transition-all hover:scale-[1.02] hover:shadow-emerald-500/10">
-                    <div className="flex-1 w-full flex items-center gap-2 px-6 py-2.5 hover:bg-white/10 rounded-full transition-colors group cursor-pointer">
+                <div className="w-full max-w-3xl bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl md:rounded-full p-2 md:p-1 shadow-2xl flex flex-col md:flex-row items-center gap-1 md:gap-0.5 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-1000 transform transition-all hover:scale-[1.01] hover:shadow-emerald-500/10">
+                    <div className="flex-1 w-full flex items-center gap-3 px-4 md:px-6 py-3 md:py-2.5 hover:bg-white/10 rounded-xl md:rounded-full transition-colors group cursor-pointer">
                         <div className="p-2 bg-emerald-500/20 rounded-full group-hover:bg-emerald-500/30 transition-colors">
                             <MapPin className="text-emerald-400 w-4 h-4" />
                         </div>
-                        <div className="flex flex-col items-start text-left">
+                        <div className="flex flex-col items-start text-left flex-1">
                             <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 leading-tight">Location</span>
                             <input
                                 type="text"
@@ -81,11 +81,11 @@ export default function Hero() {
 
                     <div className="hidden md:block w-px h-8 bg-white/20" />
 
-                    <div className="flex-1 w-full flex items-center gap-2 px-6 py-2.5 hover:bg-white/10 rounded-full transition-colors group cursor-pointer">
+                    <div className="flex-1 w-full flex items-center gap-3 px-4 md:px-6 py-3 md:py-2.5 hover:bg-white/10 rounded-xl md:rounded-full transition-colors group cursor-pointer">
                         <div className="p-2 bg-emerald-500/20 rounded-full group-hover:bg-emerald-500/30 transition-colors">
                             <Calendar className="text-emerald-400 w-4 h-4" />
                         </div>
-                        <div className="flex flex-col items-start text-left">
+                        <div className="flex flex-col items-start text-left flex-1">
                             <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 leading-tight">Date</span>
                             <input
                                 type="text"
@@ -97,11 +97,11 @@ export default function Hero() {
 
                     <div className="hidden md:block w-px h-8 bg-white/20" />
 
-                    <div className="flex-1 w-full flex items-center gap-2 px-6 py-2.5 hover:bg-white/10 rounded-full transition-colors group cursor-pointer">
+                    <div className="flex-1 w-full flex items-center gap-3 px-4 md:px-6 py-3 md:py-2.5 hover:bg-white/10 rounded-xl md:rounded-full transition-colors group cursor-pointer">
                         <div className="p-2 bg-emerald-500/20 rounded-full group-hover:bg-emerald-500/30 transition-colors">
                             <Users className="text-emerald-400 w-4 h-4" />
                         </div>
-                        <div className="flex flex-col items-start text-left">
+                        <div className="flex flex-col items-start text-left flex-1">
                             <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 leading-tight">Guests</span>
                             <input
                                 type="text"
@@ -111,19 +111,18 @@ export default function Hero() {
                         </div>
                     </div>
 
-                    <Button size="icon" className="w-full md:w-12 h-12 md:h-12 rounded-full shadow-lg bg-emerald-600 hover:bg-emerald-500 text-white shrink-0 transition-all hover:scale-105 active:scale-95 m-1">
+                    <Button size="icon" className="w-full md:w-12 h-12 md:h-12 rounded-xl md:rounded-full shadow-lg bg-emerald-600 hover:bg-emerald-500 text-white shrink-0 transition-all hover:scale-105 active:scale-95 m-1">
                         <Search className="w-5 h-5" />
                     </Button>
                 </div>
 
                 {/* Trust Badges / As Seen On */}
-                <div className="mt-12 flex flex-col items-center gap-4 opacity-80">
-                    <p className="text-xs uppercase tracking-widest text-white/60">As seen on</p>
-                    <div className="flex items-center gap-8 grayscale opacity-70 hover:opacity-100 transition-opacity">
-                        {/* Placeholders for logos (text for now or simple svgs) */}
-                        <span className="text-lg font-serif font-bold">VOGUE</span>
-                        <span className="text-lg font-sans font-bold">NatGeo</span>
-                        <span className="text-lg font-serif italic">Traveler</span>
+                <div className="mt-8 md:mt-12 flex flex-col items-center gap-4 opacity-80">
+                    <p className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/60">As seen on</p>
+                    <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10 grayscale opacity-70 hover:opacity-100 transition-opacity px-4">
+                        <span className="text-base md:text-lg font-serif font-bold">VOGUE</span>
+                        <span className="text-base md:text-lg font-sans font-bold">NatGeo</span>
+                        <span className="text-base md:text-lg font-serif italic">Traveler</span>
                     </div>
                 </div>
             </motion.div>

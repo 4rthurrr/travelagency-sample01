@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Clock, Users, Check } from "lucide-react";
 import ScrollAnimation from "@/components/ui/scroll-animation";
+import { cn } from "@/lib/utils";
 
 const packages = [
     {
@@ -66,13 +67,13 @@ export default function Packages() {
     return (
         <section id="packages" className="relative py-20 bg-white">
             <div className="container mx-auto px-4">
-                <ScrollAnimation variant="fadeUp" className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                    <div className="max-w-2xl">
+                <ScrollAnimation variant="fadeUp" className="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 gap-6 text-center md:text-left">
+                    <div className="max-w-2xl w-full">
                         <span className="text-emerald-600 font-semibold tracking-wider uppercase text-sm">Tailored Experiences</span>
                         <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mt-2">Bestselling Packages</h2>
-                        <p className="text-gray-600 mt-4">Choose from our most popular itineraries, crafting memories that last a lifetime.</p>
+                        <p className="text-gray-600 mt-4 px-4 md:px-0">Choose from our most popular itineraries, crafting memories that last a lifetime.</p>
                     </div>
-                    <Button variant="premium">View All Packages</Button>
+                    <Button variant="premium" className="w-full md:w-auto">View All Packages</Button>
                 </ScrollAnimation>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -81,7 +82,10 @@ export default function Packages() {
                             key={pkg.id}
                             variant="fadeUp"
                             delay={idx * 0.1}
-                            className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col"
+                            className={cn(
+                                "bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col",
+                                idx >= 3 ? "hidden md:flex" : "flex"
+                            )}
                         >
                             <div className="relative h-64 w-full">
                                 <Image
@@ -120,6 +124,12 @@ export default function Packages() {
                             </div>
                         </ScrollAnimation>
                     ))}
+                </div>
+
+                <div className="mt-12 text-center md:hidden">
+                    <Button variant="outline" className="w-full sm:w-auto border-emerald-600 text-emerald-600" onClick={() => window.location.href = "#packages"}>
+                        View All Packages
+                    </Button>
                 </div>
             </div>
         </section>

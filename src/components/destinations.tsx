@@ -83,41 +83,43 @@ export default function Destinations() {
                     <p className="text-gray-600 max-w-2xl mx-auto mt-4">Discover the most breathtaking locations across the island, curated just for you.</p>
                 </ScrollAnimation>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {destinations.map((destination, idx) => (
-                        <ScrollAnimation
-                            key={destination.id}
-                            variant="fadeUp"
-                            delay={idx * 0.1}
-                            className="group relative h-[400px] overflow-hidden rounded-2xl shadow-lg cursor-pointer"
-                        >
-                            <Image
-                                src={destination.image}
-                                alt={destination.name}
-                                fill
-                                className="object-cover transition-transform duration-500 group-hover:scale-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
+                <div className="relative overflow-hidden">
+                    <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto md:overflow-x-visible pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+                        {destinations.map((destination, idx) => (
+                            <ScrollAnimation
+                                key={destination.id}
+                                variant="fadeUp"
+                                delay={idx * 0.1}
+                                className="group relative h-[400px] min-w-[280px] md:min-w-0 md:w-auto overflow-hidden rounded-2xl shadow-lg cursor-pointer flex-shrink-0 snap-center"
+                            >
+                                <Image
+                                    src={destination.image}
+                                    alt={destination.name}
+                                    fill
+                                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
 
-                            <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                <div className="flex items-center justify-between mb-2">
-                                    <h3 className="text-2xl font-bold">{destination.name}</h3>
-                                    <div className="flex items-center gap-1 text-yellow-400 text-sm font-semibold">
-                                        ★ {destination.rating}
+                                <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <h3 className="text-2xl font-bold">{destination.name}</h3>
+                                        <div className="flex items-center gap-1 text-yellow-400 text-sm font-semibold">
+                                            ★ {destination.rating}
+                                        </div>
+                                    </div>
+                                    <p className="text-gray-300 text-sm mb-4 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                                        {destination.description}
+                                    </p>
+                                    <div className="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
+                                        <span className="text-emerald-400 font-bold">{destination.price}</span>
+                                        <Button size="sm" variant="outline" className="text-white border-white hover:bg-white hover:text-black bg-transparent">
+                                            View Details
+                                        </Button>
                                     </div>
                                 </div>
-                                <p className="text-gray-300 text-sm mb-4 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
-                                    {destination.description}
-                                </p>
-                                <div className="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
-                                    <span className="text-emerald-400 font-bold">{destination.price}</span>
-                                    <Button size="sm" variant="outline" className="text-white border-white hover:bg-white hover:text-black bg-transparent">
-                                        View Details
-                                    </Button>
-                                </div>
-                            </div>
-                        </ScrollAnimation>
-                    ))}
+                            </ScrollAnimation>
+                        ))}
+                    </div>
                 </div>
 
                 <div className="text-center mt-12">

@@ -72,23 +72,45 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Menu */}
-            {isMobileMenuOpen && (
-                <div className="absolute top-full left-0 right-0 bg-white shadow-xl p-4 md:hidden flex flex-col gap-4 animate-in slide-in-from-top-5">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className="text-gray-700 font-medium hover:text-emerald-600 transition-colors"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
-                    <Button variant="premium" className="w-full">
-                        Book Now
-                    </Button>
+            <div
+                className={cn(
+                    "fixed inset-0 bg-white/95 backdrop-blur-xl z-[60] md:hidden transition-all duration-500 ease-in-out",
+                    isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                )}
+            >
+                <div className="flex flex-col h-full p-8 pt-24 gap-8">
+                    {/* Close Button in Menu */}
+                    <button
+                        className="absolute top-5 right-4 p-2 text-gray-800"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                        <X className="w-6 h-6" />
+                    </button>
+
+                    <div className="flex flex-col gap-6">
+                        {navLinks.map((link, idx) => (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className="text-3xl font-bold text-gray-900 hover:text-emerald-600 transition-colors"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                style={{ transitionDelay: `${idx * 50}ms` }}
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                    </div>
+
+                    <div className="mt-auto pb-12 flex flex-col gap-4">
+                        <Button variant="premium" size="lg" className="w-full text-lg h-14">
+                            Book Now
+                        </Button>
+                        <div className="flex justify-center gap-6 text-gray-400 mt-4">
+                            <span className="text-sm font-medium">Follow us on social</span>
+                        </div>
+                    </div>
                 </div>
-            )}
+            </div>
         </header>
     );
 }

@@ -52,15 +52,15 @@ export default function Footer() {
                         <ul className="space-y-4">
                             <li className="flex items-start gap-3">
                                 <MapPin className="w-5 h-5 text-emerald-500 shrink-0 mt-1" />
-                                <span>123 flower Rd, Colombo 07, Sri Lanka</span>
+                                <span className="text-sm md:text-base">123 flower Rd, Colombo 07, Sri Lanka</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Phone className="w-5 h-5 text-emerald-500 shrink-0" />
-                                <span>+94 11 234 5678</span>
+                                <span className="text-sm md:text-base">+94 11 234 5678</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Mail className="w-5 h-5 text-emerald-500 shrink-0" />
-                                <span>hello@arabiers.lk</span>
+                                <span className="text-sm md:text-base">hello@arabiers.lk</span>
                             </li>
                         </ul>
                     </ScrollAnimation>
