@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Arabiers Travel - Discover the Extraordinary",
-  description: "Premium travel agency in Sri Lanka Offering tailored holidays and unforgettable experiences.",
+  title: "Travel with Sampath - Discover the Extraordinary",
+  description: "Premium travel agency in Sri Lanka offering tailored holidays and unforgettable experiences.",
 };
 
 export default function RootLayout({

@@ -39,7 +39,7 @@ export default function Navbar() {
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
                     <span className={cn("text-2xl font-bold tracking-tighter", isScrolled ? "text-emerald-800" : "text-white")}>
-                        Arabiers<span className="text-emerald-500">.</span>
+                        Travel with Sampath
                     </span>
                 </Link>
 

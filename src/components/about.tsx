@@ -28,7 +28,7 @@ export default function About() {
                         <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-8 border-white">
                             <Image
                                 src="/images/hero_bg.jpg"
-                                alt="About Arabiers"
+                                alt="About Travel with Sampath"
                                 width={800}
                                 height={600}
                                 className="w-full h-auto object-cover"
@@ -54,7 +54,7 @@ export default function About() {
                             Crafting Exceptional <span className="text-emerald-600">Travel Experiences</span> Since 2010
                         </h2>
                         <p className="text-base md:text-lg text-slate-600 mb-8 leading-relaxed px-4 lg:px-0">
-                            At Arabiers, we believe that travel is more than just visiting new places; it&apos;s about creating memories that last a lifetime. Our mission is to provide you with authentic, high-quality, and personalized travel experiences that showcase the true essence of every destination.
+                            At Travel with Sampath, we believe that travel is more than just visiting new places; it&apos;s about creating memories that last a lifetime. Our mission is to provide you with authentic, high-quality, and personalized travel experiences that showcase the true essence of every destination.
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 text-left max-w-md mx-auto lg:mx-0 px-4 lg:px-0">

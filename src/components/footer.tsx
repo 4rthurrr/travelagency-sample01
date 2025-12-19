@@ -12,7 +12,7 @@ export default function Footer() {
                     <ScrollAnimation variant="fadeUp" delay={0}>
                         <Link href="/" className="inline-block mb-6">
                             <span className="text-2xl font-bold text-white tracking-tighter">
-                                Arabiers<span className="text-emerald-500">.</span>
+                                Travel with Sampath
                             </span>
                         </Link>
                         <p className="text-gray-400 mb-6 leading-relaxed">
@@ -67,7 +67,7 @@ export default function Footer() {
                 </div>
 
                 <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-                    <p>&copy; {new Date().getFullYear()} Arabiers Travel. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} Travel with Sampath. All rights reserved.</p>
                     <div className="flex gap-6">
                         <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
                         <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>

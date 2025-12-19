@@ -81,21 +81,31 @@ export default function Destinations() {
     useEffect(() => {
         if (typeof window === 'undefined') return;
 
-        const interval = setInterval(() => {
-            if (!isPaused && scrollRef.current && window.innerWidth < 768) {
-                const container = scrollRef.current;
-                const scrollAmount = 300; // Width of card + gap
+        const container = scrollRef.current;
+        if (!container) return;
+
+        let animationFrameId: number;
+        const speed = 1; // Pixels per frame
+
+        const scroll = () => {
+            // Only auto-scroll on mobile devices
+            if (!isPaused && window.innerWidth < 768) {
                 const maxScroll = container.scrollWidth - container.clientWidth;
 
-                if (container.scrollLeft >= maxScroll - 10) {
-                    container.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
-                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                // Only scroll if there's actually scrollable content
+                if (maxScroll > 0) {
+                    if (container.scrollLeft >= maxScroll - 2) {
+                        container.scrollTo({ left: 0, behavior: 'auto' }); // Instant reset
+                    } else {
+                        container.scrollBy({ left: speed, behavior: 'auto' });
+                    }
                 }
             }
-        }, 4000);
+            animationFrameId = requestAnimationFrame(scroll);
+        };
 
-        return () => clearInterval(interval);
+        animationFrameId = requestAnimationFrame(scroll);
+        return () => cancelAnimationFrame(animationFrameId);
     }, [isPaused]);
 
     return (
@@ -108,50 +118,52 @@ export default function Destinations() {
                 </ScrollAnimation>
 
                 <div className="relative overflow-hidden">
-                    <div
-                        ref={scrollRef}
-                        onMouseEnter={() => setIsPaused(true)}
-                        onMouseLeave={() => setIsPaused(false)}
-                        onTouchStart={() => setIsPaused(true)}
-                        onTouchEnd={() => setIsPaused(false)}
-                        className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto md:overflow-x-visible pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0"
-                    >
-                        {destinations.map((destination, idx) => (
-                            <ScrollAnimation
-                                key={destination.id}
-                                variant="fadeUp"
-                                delay={idx * 0.1}
-                                className="group relative h-[400px] min-w-[280px] md:min-w-0 md:w-auto overflow-hidden rounded-2xl shadow-lg cursor-pointer flex-shrink-0 snap-center"
-                            >
-                                <Image
-                                    src={destination.image}
-                                    alt={destination.name}
-                                    fill
-                                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
+                    <ScrollAnimation variant="fadeIn">
+                        <div
+                            ref={scrollRef}
+                            onPointerDown={() => setIsPaused(true)}
+                            onPointerUp={() => setIsPaused(false)}
+                            onPointerLeave={() => setIsPaused(false)}
+                            className="flex gap-6 overflow-x-auto pb-8 snap-x scrollbar-hide -mx-4 px-4 touch-pan-x"
+                        >
+                            {destinations.map((destination, idx) => (
+                                <div
+                                    key={destination.id}
+                                    className="min-w-[280px] md:min-w-[320px] lg:min-w-[280px] snap-center flex-shrink-0"
+                                >
+                                    <div className="group relative rounded-2xl overflow-hidden shadow-lg h-full">
+                                        <div className="relative h-[400px]">
+                                            <Image
+                                                src={destination.image}
+                                                alt={destination.name}
+                                                fill
+                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
 
-                                <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                    <div className="flex items-center justify-between mb-2">
-                                        <h3 className="text-2xl font-bold">{destination.name}</h3>
-                                        <div className="flex items-center gap-1 text-yellow-400 text-sm font-semibold">
-                                            ★ {destination.rating}
+                                            <div className="absolute top-4 left-4">
+                                                <div className="flex items-center gap-1 bg-white/20 backdrop-blur-md px-2 py-1 rounded-lg text-white text-xs">
+                                                    <span className="text-yellow-400">★</span>
+                                                    {destination.rating}
+                                                </div>
+                                            </div>
+
+                                            <div className="absolute bottom-6 left-6 right-6 text-white">
+                                                <h3 className="text-2xl font-bold mb-1">{destination.name}</h3>
+                                                <div className="flex justify-between items-end">
+                                                    <p className="text-sm font-medium text-emerald-300">Starts from {destination.price}</p>
+                                                    <Button size="sm" variant="ghost" className="text-white hover:text-emerald-400 p-0 h-auto">
+                                                        <ArrowRight className="w-5 h-5" />
+                                                    </Button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <p className="text-gray-300 text-sm mb-4 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
-                                        {destination.description}
-                                    </p>
-                                    <div className="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
-                                        <span className="text-emerald-400 font-bold">{destination.price}</span>
-                                        <Button size="sm" variant="outline" className="text-white border-white hover:bg-white hover:text-black bg-transparent">
-                                            View Details
-                                        </Button>
-                                    </div>
                                 </div>
-                            </ScrollAnimation>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    </ScrollAnimation>
                 </div>
 
                 <div className="text-center mt-12">

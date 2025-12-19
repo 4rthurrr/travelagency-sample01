@@ -10,7 +10,7 @@ const testimonials = [
         name: "Sarah Johnson",
         role: "Traveler from UK",
         image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2574&auto=format&fit=crop",
-        text: "The trip was absolutely magical! From the tea plantations in Ella to the safari in Yala, everything was perfectly organized. Arabiers made us feel so welcome.",
+        text: "The trip was absolutely magical! From the tea plantations in Ella to the safari in Yala, everything was perfectly organized. Travel with Sampath made us feel so welcome.",
         rating: 5
     },
     {
