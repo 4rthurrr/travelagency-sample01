@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -74,6 +75,29 @@ const destinations = [
 ];
 
 export default function Destinations() {
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const [isPaused, setIsPaused] = useState(false);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        const interval = setInterval(() => {
+            if (!isPaused && scrollRef.current && window.innerWidth < 768) {
+                const container = scrollRef.current;
+                const scrollAmount = 300; // Width of card + gap
+                const maxScroll = container.scrollWidth - container.clientWidth;
+
+                if (container.scrollLeft >= maxScroll - 10) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                }
+            }
+        }, 4000);
+
+        return () => clearInterval(interval);
+    }, [isPaused]);
+
     return (
         <section id="destinations" className="relative py-20 bg-gray-50">
             <div className="container mx-auto px-4">
@@ -84,7 +108,14 @@ export default function Destinations() {
                 </ScrollAnimation>
 
                 <div className="relative overflow-hidden">
-                    <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto md:overflow-x-visible pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+                    <div
+                        ref={scrollRef}
+                        onMouseEnter={() => setIsPaused(true)}
+                        onMouseLeave={() => setIsPaused(false)}
+                        onTouchStart={() => setIsPaused(true)}
+                        onTouchEnd={() => setIsPaused(false)}
+                        className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto md:overflow-x-visible pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0"
+                    >
                         {destinations.map((destination, idx) => (
                             <ScrollAnimation
                                 key={destination.id}
@@ -97,6 +128,7 @@ export default function Destinations() {
                                     alt={destination.name}
                                     fill
                                     className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
 

@@ -25,17 +25,17 @@ export default function TextReveal({ text, className = "", delay = 0 }: TextReve
             y: 0,
             transition: {
                 type: "spring",
-                damping: 12,
-                stiffness: 100
+                damping: 15,
+                stiffness: 120
             }
         },
         hidden: {
             opacity: 0,
-            y: 20,
+            y: 10,
             transition: {
                 type: "spring",
-                damping: 12,
-                stiffness: 100
+                damping: 15,
+                stiffness: 120
             }
         }
     };
@@ -50,7 +50,7 @@ export default function TextReveal({ text, className = "", delay = 0 }: TextReve
             className={className}
         >
             {letters.map((letter, index) => (
-                <motion.span variants={child} key={index}>
+                <motion.span variants={child} key={index} style={{ willChange: "transform, opacity" }}>
                     {letter === " " ? "\u00A0" : letter}
                 </motion.span>
             ))}

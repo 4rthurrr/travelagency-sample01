@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import ScrollAnimation from "@/components/ui/scroll-animation";
 import { cn } from "@/lib/utils";
@@ -23,6 +24,29 @@ const galleryImages = [
 ];
 
 export default function Gallery() {
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const [isPaused, setIsPaused] = useState(false);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        const interval = setInterval(() => {
+            if (!isPaused && scrollRef.current && window.innerWidth < 768) {
+                const container = scrollRef.current;
+                const scrollAmount = 300; // Consistent with item width
+                const maxScroll = container.scrollWidth - container.clientWidth;
+
+                if (container.scrollLeft >= maxScroll - 10) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                }
+            }
+        }, 3500); // Slightly faster for gallery
+
+        return () => clearInterval(interval);
+    }, [isPaused]);
+
     return (
         <section className="py-24 bg-white overflow-hidden">
             <div className="container mx-auto px-4">
@@ -35,7 +59,14 @@ export default function Gallery() {
                 </ScrollAnimation>
 
                 <div className="relative overflow-hidden">
-                    <div className="flex md:grid md:grid-cols-3 gap-4 overflow-x-auto md:overflow-x-visible pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 md:auto-rows-[200px]">
+                    <div
+                        ref={scrollRef}
+                        onMouseEnter={() => setIsPaused(true)}
+                        onMouseLeave={() => setIsPaused(false)}
+                        onTouchStart={() => setIsPaused(true)}
+                        onTouchEnd={() => setIsPaused(false)}
+                        className="flex md:grid md:grid-cols-3 gap-4 overflow-x-auto md:overflow-x-visible pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 md:auto-rows-[200px]"
+                    >
                         {galleryImages.map((img, idx) => (
                             <ScrollAnimation
                                 key={idx}
@@ -52,6 +83,7 @@ export default function Gallery() {
                                     alt={img.alt}
                                     fill
                                     className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 />
                                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                     <p className="text-white font-medium bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm">

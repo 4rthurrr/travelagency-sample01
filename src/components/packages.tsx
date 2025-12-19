@@ -93,6 +93,7 @@ export default function Packages() {
                                     alt={pkg.title}
                                     fill
                                     className="object-cover hover:scale-105 transition-transform duration-500"
+                                    sizes="(max-width: 768px) 100vw, 33vw"
                                 />
                                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold text-emerald-700 shadow-sm">
                                     {pkg.price} / person

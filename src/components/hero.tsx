@@ -16,15 +16,15 @@ export default function Hero() {
         offset: ["start start", "end start"]
     });
 
-    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-    const textY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+    const textY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
 
     return (
         <section ref={ref} className="relative h-screen w-full flex items-center justify-center overflow-hidden">
             {/* Parallax Background Image */}
             <motion.div
-                style={{ y: backgroundY }}
-                className="absolute inset-0 z-0 h-[120%] w-full -top-[10%]" // Increased height for parallax buffer
+                style={{ y: backgroundY, willChange: "transform" }}
+                className="absolute inset-0 z-0 h-[115%] w-full -top-[5%]" // Optimized height for parallax buffer
             >
                 <Image
                     src="/images/hero_bg.png"
@@ -32,12 +32,15 @@ export default function Hero() {
                     fill
                     className="object-cover brightness-[0.70]"
                     priority
+                    sizes="100vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
+                {/* Visual Seal for Seam-free transition */}
+                <div className="absolute -bottom-1 left-0 right-0 h-4 bg-white md:bg-gray-50 z-10" />
             </motion.div>
 
             {/* Content */}
-            <motion.div style={{ y: textY }} className="relative z-10 container mx-auto px-4 text-center text-white flex flex-col items-center gap-6">
+            <motion.div style={{ y: textY, willChange: "transform" }} className="relative z-10 container mx-auto px-4 text-center text-white flex flex-col items-center gap-6">
                 <ScrollAnimation variant="fadeUp" delay={0.2}>
                     <span className="text-emerald-400 font-semibold tracking-wider uppercase text-sm md:text-base">
                         Welcome to Sri Lanka
